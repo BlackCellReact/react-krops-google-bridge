@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+
+def DEFAULT_GOOGLE_PLAY_SERVICES_VERSION    = "11.8.0"
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.1"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+    }
+
+    lintOptions {
+        warning 'InvalidPackage' // prevent error: https://github.com/square/okio/issues/58
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    def googlePlayServicesVersion = project.hasProperty('googlePlayServicesVersion') ? project.googlePlayServicesVersion : DEFAULT_GOOGLE_PLAY_SERVICES_VERSION
+    implementation 'com.facebook.react:react-native:+'
+    implementation "com.google.android.gms:play-services-analytics:$googlePlayServicesVersion"
+}
